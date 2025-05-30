@@ -22,6 +22,9 @@ The data set consists of 50 samples from each of three species of Iris (Iris Set
 
 <small>– Source: [Wikipedia: Iris Flower Data Set](https://en.wikipedia.org/wiki/Iris_flower_data_set)</small>
 
+
+In `/notebooks/01_eda.ipynb`, we explore the dataset and get preliminary insights.
+
 ## Folder Structure
 
 ```
