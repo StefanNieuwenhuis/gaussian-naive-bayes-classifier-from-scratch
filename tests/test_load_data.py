@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from numpy.ma.testutils import assert_equal
@@ -21,7 +23,7 @@ class TestIrisDataDownloader:
         """
 
         # Arrange
-        expected_save_path = "/path/to/data.csv"
+        expected_save_path = Path("/path/to/data.csv")
 
         # Act
         downloader = IrisDataDownloader(expected_save_path)
