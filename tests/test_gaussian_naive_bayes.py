@@ -73,9 +73,10 @@ class TestGaussianNaiveBayesClassifier:
         X, y = dummy_data
         clf = GaussianNaiveBayes()
 
-        expected_class_curvature = [[-2.24999999, -2.24999999],[-2.24999999, -2.24999999]]
-        expected_mean_pull = [[-5.99999997, -5.99999997],[ 5.99999997,  5.99999997]]
-        expected_ll_constants = [[-4.16689982, -4.16689982], [-4.16689982, -4.16689982]]
+        # TODO: Remove "magic numbers" by computing expected outputs
+        expected_class_curvature = np.array([[-2.24999999, -2.24999999],[-2.24999999, -2.24999999]])
+        expected_mean_pull = np.array([[-5.99999997, -5.99999997],[ 5.99999997,  5.99999997]])
+        expected_ll_constants = np.array([[-4.16689982, -4.16689982], [-4.16689982, -4.16689982]])
 
         # Act
         clf.fit(X, y)
@@ -129,3 +130,55 @@ class TestGaussianNaiveBayesClassifier:
 
         # Assert
         assert_array_equal(y, predicted_labels)
+
+    def test_log_proba(self, dummy_data):
+        """
+        It should estimate log probability outputs on an array of test vectors correctly
+        """
+
+        # Arrange
+        X, y = dummy_data
+        clf = GaussianNaiveBayes()
+        clf.fit(X,y)
+
+        # TODO: Remove "magic numbers" by computing expected outputs
+        expected_log_proba = np.array([
+            [ 0.00000000e+00, -3.59999998e+01],
+            [-3.77513576e-11, -2.39999999e+01],
+            [ 0.00000000e+00, -3.59999998e+01],
+            [-2.39999999e+01, -3.77513576e-11],
+            [-3.59999998e+01,  0.00000000e+00],
+            [-3.59999998e+01,  0.00000000e+00]
+        ],)
+
+        # Act
+        predicted_log_proba = clf.predict_log_proba(X)
+
+        # Assert
+        assert_array_almost_equal(expected_log_proba, predicted_log_proba)
+
+    def test_log_proba(self, dummy_data):
+        """
+        It should estimate probability outputs on an array of test vectors correctly
+        """
+
+        # Arrange
+        X, y = dummy_data
+        clf = GaussianNaiveBayes()
+        clf.fit(X,y)
+
+        # TODO: Remove "magic numbers" by computing expected outputs
+        expected_proba = np.exp(np.array([
+            [ 0.00000000e+00, -3.59999998e+01],
+            [-3.77513576e-11, -2.39999999e+01],
+            [ 0.00000000e+00, -3.59999998e+01],
+            [-2.39999999e+01, -3.77513576e-11],
+            [-3.59999998e+01,  0.00000000e+00],
+            [-3.59999998e+01,  0.00000000e+00]
+        ],))
+
+        # Act
+        predicted_proba = clf.predict_proba(X)
+
+        # Assert
+        assert_array_almost_equal(expected_proba, predicted_proba)
