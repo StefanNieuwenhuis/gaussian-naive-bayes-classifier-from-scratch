@@ -175,3 +175,7 @@ cython_debug/
 
 # Editors
 .idea
+
+# Raw data files
+/data/*
+!data/.gitkeep

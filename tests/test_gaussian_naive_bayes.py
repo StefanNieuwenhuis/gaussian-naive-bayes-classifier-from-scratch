@@ -8,6 +8,10 @@ from model.gaussian_naive_bayes import GaussianNaiveBayes
 DEFAULT_PRECISION = 8
 
 class TestGaussianNaiveBayesClassifier:
+    """
+    Unit tests to test Gaussian Naive Bayes Classifier model
+    """
+
     @pytest.fixture
     def dummy_data(self):
         """
