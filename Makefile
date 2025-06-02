@@ -1,4 +1,4 @@
-.PHONY: env jupyter test test-coverage
+.PHONY: env jupyter test test-coverage run-pipeline
 
 # Set up and activate virtual-environment, and install dependencies
 env:
@@ -16,3 +16,6 @@ test:
 # Run unit tests and generate code-coverage report
 test-coverage:
 	.venv/bin/pytest --cov=src --cov-report=xml
+
+run-pipeline:
+	PYTHONPATH=src python src/pipeline/run_pipeline.py
