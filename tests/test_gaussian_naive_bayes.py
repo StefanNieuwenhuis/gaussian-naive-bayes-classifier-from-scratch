@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from numpy.ma.testutils import assert_array_almost_equal
+from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 from model.gaussian_naive_bayes import GaussianNaiveBayes
 
@@ -64,7 +64,7 @@ class TestGaussianNaiveBayesClassifier:
         assert_array_almost_equal(expected_log_prior_probabilities, clf.class_prior_, DEFAULT_PRECISION)
         assert_array_almost_equal(expected_prior_probabilities, np.exp(clf.class_prior_), DEFAULT_PRECISION)
 
-    def test_test_log_likelihood_constants(self, dummy_data):
+    def test_test_log_likelihood_constants(self, dummy_data) -> None:
         """
         It should correctly compute the log likelihood constants (curvature, mean pull & constants) from the given test dataset
         """
@@ -85,7 +85,7 @@ class TestGaussianNaiveBayesClassifier:
         assert_array_almost_equal(expected_mean_pull, clf.class_mean_pull_, DEFAULT_PRECISION)
         assert_array_almost_equal(expected_ll_constants, clf.class_log_likelihood_constants_, DEFAULT_PRECISION)
 
-    def test_fit_empty_feature_matrix(self, dummy_data):
+    def test_fit_empty_feature_matrix(self, dummy_data) -> None:
         """
         It should throw a ValueError when the provided feature matrix is empty
         """
@@ -99,7 +99,7 @@ class TestGaussianNaiveBayesClassifier:
         with pytest.raises(ValueError, match="Feature Matrix cannot be empty"):
             clf.fit(X, y)
 
-    def test_fit_empty_target_vector(self, dummy_data):
+    def test_fit_empty_target_vector(self, dummy_data) -> None:
         """
         It should throw a ValueError when the provided target vector is empty
         """
@@ -112,3 +112,20 @@ class TestGaussianNaiveBayesClassifier:
         # Act & Assert
         with pytest.raises(ValueError, match="Target Vector cannot be empty"):
             clf.fit(X, y)
+
+    def test_predict(self, dummy_data) -> None:
+        """
+        It should correctly classify flower species
+        X_train, y_train == X_test, y_test
+        """
+
+        # Arrange
+        X, y = dummy_data
+        clf = GaussianNaiveBayes()
+        clf.fit(X,y)
+
+        # Act
+        predicted_labels = clf.predict(X)
+
+        # Assert
+        assert_array_equal(y, predicted_labels)
