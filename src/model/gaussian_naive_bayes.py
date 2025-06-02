@@ -19,7 +19,7 @@ class GaussianNaiveBayes:
         self.class_prior_: NDArray[np.float64] = None
         self.class_curvature_: NDArray[np.float64] = None
         self.class_mean_pull_: NDArray[np.float64] = None
-        self.class_log_likelihood_consts_: NDArray[np.float64] = None
+        self.class_log_likelihood_constants_: NDArray[np.float64] = None
 
     def __compute_log_prior_probabilities(self, y: NDArray) -> Self:
         """
@@ -88,7 +88,7 @@ class GaussianNaiveBayes:
         # With thetas and variances computed, we can pre-compute the log-likelihood constants
         self.class_curvature_ = -0.5 / variances
         self.class_mean_pull_ = thetas / variances
-        self.class_log_likelihood_consts_ = -0.5 * np.log(2 * np.pi * variances) - (thetas ** 2) / (2 * variances)
+        self.class_log_likelihood_constants_ = -0.5 * np.log(2 * np.pi * variances) - (thetas ** 2) / (2 * variances)
 
         return self
 
@@ -111,7 +111,7 @@ class GaussianNaiveBayes:
         log_likelihood = (
                 (X ** 2) @ self.class_curvature_.T +
                 X @ self.class_mean_pull_.T +
-                np.sum(self.class_log_likelihood_consts_, axis=1)
+                np.sum(self.class_log_likelihood_constants_, axis=1)
         )
 
         # Add prior (log) probabilities to each row
