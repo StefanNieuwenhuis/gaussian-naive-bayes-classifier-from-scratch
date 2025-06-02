@@ -1,8 +1,8 @@
-.PHONY: env jupyter test
+.PHONY: env jupyter test test-coverage
 
 # Set up and activate virtual-environment, and install dependencies
 env:
-	python3 -m venv .venv
+	python3.12 -m venv .venv
 	. .venv/bin/activate && pip install -r requirements.txt
 
 # Run Jupyterlab
@@ -12,3 +12,7 @@ jupyter:
 # Run unit tests
 test:
 	.venv/bin/pytest
+
+# Run unit tests and generate code-coverage report
+test-coverage:
+	.venv/bin/pytest --cov=src --cov-report=xml
