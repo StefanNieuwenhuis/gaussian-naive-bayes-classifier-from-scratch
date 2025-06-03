@@ -1,6 +1,6 @@
 from typing import Self
 
-from numpy._typing import NDArray
+from numpy.typing import NDArray
 from sklearn.preprocessing import LabelEncoder
 
 from data.base import Transformer

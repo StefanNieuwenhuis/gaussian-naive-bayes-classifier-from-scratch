@@ -1,7 +1,7 @@
 from typing import Self
 
 import numpy as np
-from numpy._typing import NDArray
+from numpy.typing import NDArray
 
 from data.base import Transformer
 
