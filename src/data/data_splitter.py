@@ -11,6 +11,7 @@ class DataSplitter:
     """
 
     def __init__(self, test_size = 0.2, stratify = None, random_state = 42):
+        super().__init__()
         self.test_size = test_size
         self.stratify = stratify
         self.random_state = random_state

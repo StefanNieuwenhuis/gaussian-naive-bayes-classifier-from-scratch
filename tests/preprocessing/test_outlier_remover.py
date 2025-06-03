@@ -56,8 +56,8 @@ class TestOutlierRemover:
             mask = class_indices == class_id
             subset = X[mask]
 
-            expected_q1_[class_id] = np.percentile(subset, .25, axis=0)
-            expected_q3_[class_id] = np.percentile(subset, .75, axis=0)
+            expected_q1_[class_id] = np.percentile(subset, 25, axis=0)
+            expected_q3_[class_id] = np.percentile(subset, 75, axis=0)
 
         outlier_remover = OutlierRemover()
 

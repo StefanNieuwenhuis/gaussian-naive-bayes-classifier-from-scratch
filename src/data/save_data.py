@@ -5,14 +5,17 @@ from pathlib import Path
 from typing import Self
 from numpy.typing import NDArray
 
+from utils.logging_factory import LoggerFactory
 
-class SaveData():
+
+class SaveData:
     """
     Save preprocessed data to CSV
     """
 
-    def __init__(self, save_path: str = 'data/preprocessed/' ):
+    def __init__(self, save_path: str = 'data/processed/' ):
         self.save_path_ = Path(save_path)
+        self.logger = LoggerFactory.get_logger(self.__class__.__name__)
 
     def save(self, X: NDArray, y: NDArray, name: str) -> Self:
         """
@@ -47,5 +50,30 @@ class SaveData():
         # Save to CSV
         pd.DataFrame(X).to_csv(X_path)
         pd.DataFrame(y).to_csv(y_path)
+
+        return self
+
+    def save_all(self, X_train: NDArray, y_train: NDArray, X_test: NDArray, y_test: NDArray) -> Self:
+        """
+        Convenience method to save train/test split datasets at once
+
+        Parameters
+        ----------
+        X_train: nd.array of shape (n_samples, n_features)
+            Training data feature matrix
+        y_train: nd.array of shape (n_samples,)
+            Training data target vector
+        X_test: nd.array of shape (n_samples, n_features)
+            Test data feature matrix
+        y_test: nd.array of shape (n_samples,)
+            Test data target vector
+
+        Returns
+        -------
+        self: class-instance
+        """
+
+        self.save(X_test, y_test, 'test')
+        self.save(X_train, y_train, 'train')
 
         return self

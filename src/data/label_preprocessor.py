@@ -1,5 +1,6 @@
 from typing import Self
 
+import numpy as np
 from numpy.typing import NDArray
 from sklearn.preprocessing import LabelEncoder
 
@@ -12,6 +13,7 @@ class LabelPreProcessor(Transformer):
     """
 
     def __init__(self):
+        super().__init__()
         self.encoder_ = LabelEncoder()
 
     def fit(self, X: NDArray, y: NDArray = None) -> Self:
@@ -31,8 +33,11 @@ class LabelPreProcessor(Transformer):
         """
 
         if y is None:
-            raise ValueError("LabelPreprocessor requires `y` to be non-null.")
+            error_message = "LabelPreprocessor requires `y` to be non-null."
+            self.logger.error(error_message)
+            raise ValueError(error_message)
 
+        self.logger.info("Fitting LabelPreprocessor on %d unique classes", len(np.unique(y)))
         self.encoder_.fit(y)
 
         return self
@@ -51,7 +56,7 @@ class LabelPreProcessor(Transformer):
         C: nd.array of shape (n_samples,)
             Transformed target vector
         """
-
+        self.logger.info("Transforming label classes on %d unique classes", len(np.unique(y)))
         return self.encoder_.transform(y)
 
     def fit_transform(self, X: NDArray, y=None) -> NDArray:
@@ -87,4 +92,5 @@ class LabelPreProcessor(Transformer):
         C: nd.array of shape (n_samples, n_features)
             Inverse-Transformed target vector
         """
+        self.logger.info("Inverse-transforming encoded class labels on %d unique classes", len(np.unique(y_encoded)))
         return self.encoder_.inverse_transform(y_encoded)
