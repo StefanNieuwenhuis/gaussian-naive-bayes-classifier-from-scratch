@@ -1,5 +1,3 @@
-import numpy as np
-
 from abc import abstractmethod
 from typing import Self
 from numpy.typing import NDArray

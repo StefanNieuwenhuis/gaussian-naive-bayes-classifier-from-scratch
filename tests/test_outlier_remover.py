@@ -2,7 +2,7 @@ import re
 
 import pytest
 import numpy as np
-from numpy.ma.testutils import assert_array_equal, assert_array_almost_equal, assert_equal
+from numpy.ma.testutils import assert_array_equal, assert_array_almost_equal
 
 from data.outlier_remover import OutlierRemover
 
