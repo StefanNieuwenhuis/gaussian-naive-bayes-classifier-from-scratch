@@ -49,7 +49,7 @@ class GaussianNaiveBayes:
 
         Parameters
         ----------
-        X: nd.array of shape (n_sample, n_features)
+        X: nd.array of shape (n_samples, n_features)
             Feature matrix
         y: nd.array of shape (n_samples,)
             Target vector
