@@ -2,24 +2,10 @@ from abc import abstractmethod
 from typing import Self
 from numpy.typing import NDArray
 
-
-class Transformer:
-    @abstractmethod
-    def fit(self, X: NDArray, y: NDArray=None) -> Self:
-        """
-        Abstract method that learns and stores any statistics or parameters needed for transformation.
-
-        Parameters
-        ----------
-        X: nd.array of shape (n_samples, n_features)
-            Feature matrix
-        y: nd.array of shape (n_samples,)
-            Target vector
-
-        Returns
-        -------
-        self: class-instance
-        """
+class StatelessTransformer:
+    """
+    Stateless Transformer base class
+    """
 
     @abstractmethod
     def transform(self, X: NDArray, y: NDArray) -> NDArray:
@@ -37,6 +23,28 @@ class Transformer:
         -------
         C: nd.array of shape (n_samples, n_features)
             Transformed feature matrix
+        """
+
+class Transformer(StatelessTransformer):
+    """
+    Transformer base class
+    """
+
+    @abstractmethod
+    def fit(self, X: NDArray, y: NDArray=None) -> Self:
+        """
+        Abstract method that learns and stores any statistics or parameters needed for transformation.
+
+        Parameters
+        ----------
+        X: nd.array of shape (n_samples, n_features)
+            Feature matrix
+        y: nd.array of shape (n_samples,)
+            Target vector
+
+        Returns
+        -------
+        self: class-instance
         """
 
     def fit_transform(self, X: NDArray, y=None)-> NDArray:
@@ -57,4 +65,3 @@ class Transformer:
         """
 
         return self.fit(X,y).transform(X, y)
-

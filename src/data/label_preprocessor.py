@@ -48,8 +48,8 @@ class LabelPreProcessor(Transformer):
 
         Returns
         -------
-        C: nd.array of shape (n_samples, n_features)
-            Transformed feature matrix
+        C: nd.array of shape (n_samples,)
+            Transformed target vector
         """
 
         return self.encoder_.transform(y)
