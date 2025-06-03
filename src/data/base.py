@@ -41,7 +41,7 @@ class Transformer:
 
     def fit_transform(self, X: NDArray, y=None)-> NDArray:
         """
-        Convenience method that applies fit and trasnform in a single call.
+        Convenience method that applies fit and transform in a single call.
 
         Parameters
         ----------
@@ -56,6 +56,5 @@ class Transformer:
             Transformed feature matrix
         """
 
-        self.fit(X, y)
+        return self.fit(X,y).transform(X, y)
 
-        return self.transform(X)

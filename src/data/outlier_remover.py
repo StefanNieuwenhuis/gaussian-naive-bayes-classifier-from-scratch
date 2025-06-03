@@ -60,6 +60,8 @@ class OutlierRemover(Transformer):
         ----------
         X: nd.array of shape (n_samples, n_features)
             Feature matrix
+        y: nd.array of shape (n_samples,)
+            Target vector
 
         Returns
         -------
@@ -88,4 +90,19 @@ class OutlierRemover(Transformer):
         return X[mask], y[mask]
 
     def fit_transform(self, X: NDArray, y=None) -> NDArray:
+        """
+        Apply fit and transform in a single call
+
+        Parameters
+        ----------
+        X: nd.array of shape (n_samples, n_features)
+            Feature matrix
+        y: nd.array of shape (n_samples,)
+            Target vector
+
+        Returns
+        -------
+        C: nd.array of shape (n_samples, n_features)
+            Transformed feature matrix
+        """
         return self.fit(X, y).transform(X, y)
