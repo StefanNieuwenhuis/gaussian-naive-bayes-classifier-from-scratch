@@ -99,5 +99,4 @@ class PreProcessingPipeline(Transformer):
         """
 
         self.logger.info("Starting pipeline fit_transform")
-        self.fit(X, y)
-        return self.transform(X, y)
+        return self.fit(X,y).transform(X, y)

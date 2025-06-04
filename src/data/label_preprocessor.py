@@ -57,7 +57,7 @@ class LabelPreProcessor(Transformer):
             Transformed target vector
         """
         self.logger.info("Transforming label classes on %d unique classes", len(np.unique(y)))
-        return self.encoder_.transform(y)
+        return X, self.encoder_.transform(y)
 
     def fit_transform(self, X: NDArray, y=None) -> NDArray:
         """

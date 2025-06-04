@@ -18,4 +18,5 @@ test-coverage:
 	.venv/bin/pytest --cov=src --cov-report=xml
 
 run-pipeline:
-	PYTHONPATH=src python src/pipeline/run_pipeline.py
+	PYTHONPATH=src python src/pipeline/preprocess.py
+

@@ -53,7 +53,7 @@ class SaveData:
 
         return self
 
-    def save_all(self, X_train: NDArray, y_train: NDArray, X_test: NDArray, y_test: NDArray) -> Self:
+    def save_all(self, X_train: NDArray, X_test: NDArray, y_train: NDArray, y_test: NDArray) -> Self:
         """
         Convenience method to save train/test split datasets at once
 

@@ -32,6 +32,7 @@ class DataSplitter:
         C: tuple of nd.array
             Test and training feature matrices, and
             test and training target vectors
+            Order: X_train, X_test, y_train, y_test
         """
         return train_test_split(
             X,
